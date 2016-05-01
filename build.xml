@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<project name="galaxyexo">
+
+  	<property name="src.dir" location="src" />	
+  	<property name="lib.dir" location="lib" />
+  	<property name="build.dir" location="build" />
+  	<property name="build.classes.dir" location="${build.dir}/classes" />
+  	<property name="build.dist.dir" location="${build.dir}/dist" />
+  	<property name="build.unjar.dir" location="${build.dir}/unjar" />
+  
+	<path id="compile.classpath">
+    <pathelement location="${build.classes.dir}"/>
+ 		<fileset dir="${lib.dir}">
+        	<include name="**/*.jar"/>
+      	</fileset>
+  	</path>	
+
+	<!-- ======================================================================= -->
+	<!-- Target: init                                                            -->
+	<!-- Depends:                                                                -->
+	<!-- Description: Perform any initialization required to run other targets   -->
+	<!-- ======================================================================= -->
+	<target name="init">
+		<mkdir dir="${build.classes.dir}" />
+	    <mkdir dir="${build.dist.dir}" />
+	</target>
+
+	<!-- ======================================================================= -->
+	<!-- Target: clean                                                           -->
+	<!-- Depends: init                                                           -->
+	<!-- Description: clean up files produced in the build                       -->
+	<!-- ======================================================================= -->
+	<target name="clean" depends="init" description="remove build output" >
+		<delete dir="${build.dist.dir}"  failonerror="false"/>
+		<delete dir="${build.classes.dir}"  failonerror="false"/>
+		<delete dir="${build.unjar.dir}"  failonerror="false"/>
+	</target>
+	
+	<!-- ======================================================================= -->
+	<!-- Target: compile                                                         -->
+	<!-- Depends: init                                                           -->
+	<!-- Description: Compile the source code                                    -->
+	<!-- ======================================================================= -->
+	<target name="compile" depends="init" description="Compile the code" >
+		<javac srcdir="${src.dir}"
+			destdir="${build.classes.dir}"	
+			classpathref="compile.classpath"
+			debug="true"
+			debuglevel="lines,vars,source"
+			deprecation="yes"
+			compiler="modern"
+			verbose="no">		  
+			<include name="**/*.java"/>
+		</javac>
+	</target>
+	
+	<!-- ======================================================================= -->
+	<!-- Target: buildfilecopy                                                   -->
+	<!-- Depends: init                                                           -->
+	<!-- Description: Copies all non-source files required by utils              -->
+	<!--              from the src directory to the build directory              -->
+	<!-- ======================================================================= -->
+	<target name="buildfilecopy" depends="init" description="Copy non-src files to the build dir" >
+		<copy todir="${build.classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.gif"/>
+				<include name="**/*.html"/>
+				<include name="**/*.jpg"/>
+				<include name="**/*.xml"/>
+				<include name="**/*.txt"/>
+				<include name="**/*.dtd"/>
+				<include name="**/*.bat"/>
+				<include name="**/*.exe"/>
+				<include name="**/*.ico"/>
+				<include name="**/*.png"/>
+				<include name="**/*.properties"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ======================================================================= -->
+	<!-- Target: build                                                           -->
+	<!-- Depends: compile, buildfilecopy                                         -->
+	<!-- Description: Compiles all the client source files and copies other      -->
+	<!--              required files to the build directory to create a usable   -->
+	<!--              version of the utils module                                -->
+	<!-- ======================================================================= -->
+	<target name="build" depends="compile, buildfilecopy"
+		description="build and copy files" >
+	</target>
+	
+	
+	<!-- ======================================================================= -->
+	<!-- Targets: unjar*                                                         -->
+	<!-- Description: unjars various required libraries					         -->
+	<!-- ======================================================================= -->
+	<target name="unjarall" depends="unjarpicard, unjarjfreechart"
+		description="unjars all external libraries">
+	</target>
+	<target name="unjarpicard"
+		description="unjars picard libraries">
+	    <mkdir dir="${build.unjar.dir}.tmp" />
+	    <unjar dest="${build.unjar.dir}.tmp">
+	      <fileset dir="${lib.dir}">
+			<include name="picard/**/*.jar"/>
+	      </fileset>
+	    </unjar>
+	    <move file="${build.unjar.dir}.tmp" tofile="${build.unjar.dir}/picard" />
+ 	</target>
+	<target name="unjarjfreechart"
+		description="unjars jfreechart libraries">
+	    <mkdir dir="${build.unjar.dir}.tmp" />
+	    <unjar dest="${build.unjar.dir}.tmp">
+	      <fileset dir="${lib.dir}">
+			<include name="jfreechart/**/*.jar"/>
+	      </fileset>
+	    </unjar>
+	    <move file="${build.unjar.dir}.tmp" tofile="${build.unjar.dir}/jfreechart" />
+ 	</target>
+	
+	
+	<!-- ======================================================================= -->
+	<!-- Target: makealljars                                                     -->
+	<!-- Description: Makes all executable jar files                             -->
+	<!-- ======================================================================= -->
+	<target name="makealljars" depends="makebamtoscidxjar, makefourcolorplotjar, makepairedendcrossplotjar, 
+					makepehistogramjar, maketagpileupjar"
+					description="make all executable jars" >
+	</target>
+
+	<!-- ======================================================================= -->
+	<!-- Targets: makebamtoscidxjar                                              -->
+	<!-- Description: make an executable jar for BAMtoscIDX					     -->
+	<!-- ======================================================================= -->
+	<target name="makebamtoscidxjar" depends="init, build, unjarpicard" 
+		description="make an executable jar for BAMtoscIDX" >
+	    <javac srcdir="${src.dir}"
+		   destdir="${build.classes.dir}"	
+		   classpathref="compile.classpath"
+		   debug="true"
+		   debuglevel="lines,vars,source"
+		   deprecation="yes"
+		   compiler="modern"
+		   verbose="no">		  
+	      <include name="org/seqcode/galaxyexo/bamtoscidx/*.java"/>
+	    </javac>
+		<jar destfile="${build.dist.dir}/BAMtoscIDX.jar" manifest="manifests/bamtoscidx_manifest.txt">	    
+	      <fileset dir="${src.dir}" includes="**/bamtoscidx/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/bamtoscidx/*.class"/>
+		  <fileset dir="${build.unjar.dir}/picard"/>
+	    </jar>  
+	    <chmod file="${build.dist.dir}/BAMtoscIDX.jar" perm="755"/>
+	</target>
+	
+	<!-- ======================================================================= -->
+	<!-- Targets: makefourcolorplotjar                                              -->
+	<!-- Description: make an executable jar for FourColorPlot					     -->
+	<!-- ======================================================================= -->
+	<target name="makefourcolorplotjar" depends="init, build" 
+		description="make an executable jar for FourColorPlot" >
+	    <javac srcdir="${src.dir}"
+		   destdir="${build.classes.dir}"	
+		   classpathref="compile.classpath"
+		   debug="true"
+		   debuglevel="lines,vars,source"
+		   deprecation="yes"
+		   compiler="modern"
+		   verbose="no">		  
+	      <include name="org/seqcode/galaxyexo/fourcolorplot/*.java"/>
+	    </javac>
+		<jar destfile="${build.dist.dir}/FourColorPlot.jar" manifest="manifests/fourcolorplot_manifest.txt">	    
+	      <fileset dir="${src.dir}" includes="**/fourcolorplot/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/fourcolorplot/*.class"/>
+	    </jar>  
+	    <chmod file="${build.dist.dir}/FourColorPlot.jar" perm="755"/>
+	</target>
+
+	<!-- ======================================================================= -->
+	<!-- Targets: makepairedendcrossplotjar                                      -->
+	<!-- Description: make an executable jar for PairedendCrossPlot			     -->
+	<!-- ======================================================================= -->
+	<target name="makepairedendcrossplotjar" depends="init, build" 
+		description="make an executable jar for PairedendCrossPlot" >
+	    <javac srcdir="${src.dir}"
+		   destdir="${build.classes.dir}"	
+		   classpathref="compile.classpath"
+		   debug="true"
+		   debuglevel="lines,vars,source"
+		   deprecation="yes"
+		   compiler="modern"
+		   verbose="no">		  
+	      <include name="org/seqcode/galaxyexo/pairedendcrossplot/*.java"/>
+	    </javac>
+		<jar destfile="${build.dist.dir}/PairedendCrossPlot.jar" manifest="manifests/pairedendcrossplot_manifest.txt">	    
+	      <fileset dir="${src.dir}" includes="**/pairedendcrossplot/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/pairedendcrossplot/*.class"/>
+	    </jar>  
+	    <chmod file="${build.dist.dir}/PairedendCrossPlot.jar" perm="755"/>
+	</target>
+
+	<!-- ======================================================================= -->
+	<!-- Targets: makepehistogramjar                                             -->
+	<!-- Description: make an executable jar for PEHistogram				     -->
+	<!-- ======================================================================= -->
+	<target name="makepehistogramjar" depends="init, build, unjarpicard, unjarjfreechart" 
+		description="make an executable jar for PEHistogram" >
+	    <javac srcdir="${src.dir}"
+		   destdir="${build.classes.dir}"	
+		   classpathref="compile.classpath"
+		   debug="true"
+		   debuglevel="lines,vars,source"
+		   deprecation="yes"
+		   compiler="modern"
+		   verbose="no">		  
+	      <include name="org/seqcode/galaxyexo/pehistogram/*.java"/>
+	    </javac>
+		<jar destfile="${build.dist.dir}/PEHistogram.jar" manifest="manifests/pehistogram_manifest.txt">	    
+	      <fileset dir="${src.dir}" includes="**/pehistogram/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/pehistogram/*.class"/>
+		  <fileset dir="${build.unjar.dir}/picard"/>
+		  <fileset dir="${build.unjar.dir}/jfreechart"/>
+	    </jar>  
+	    <chmod file="${build.dist.dir}/PEHistogram.jar" perm="755"/>
+	</target>
+	
+	<!-- ======================================================================= -->
+	<!-- Targets: maketagpileupjar                                               -->
+	<!-- Description: make an executable jar for TagPileup				     -->
+	<!-- ======================================================================= -->
+	<target name="maketagpileupjar" depends="init, build, unjarpicard" 
+		description="make an executable jar for TagPileup" >
+	    <javac srcdir="${src.dir}"
+		   destdir="${build.classes.dir}"	
+		   classpathref="compile.classpath"
+		   debug="true"
+		   debuglevel="lines,vars,source"
+		   deprecation="yes"
+		   compiler="modern"
+		   verbose="no">		  
+	      <include name="org/seqcode/galaxyexo/tagpileup/**/*.java"/>
+	    </javac>
+		<jar destfile="${build.dist.dir}/TagPileup.jar" manifest="manifests/tagpileup_manifest.txt">	    
+	      <fileset dir="${src.dir}" includes="**/tagpileup/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/tagpileup/*.class"/>
+		  <fileset dir="${build.unjar.dir}/picard"/>
+	    </jar>  
+	    <chmod file="${build.dist.dir}/TagPileup.jar" perm="755"/>
+	</target>
+	
+	
+</project>

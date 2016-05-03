@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.tagpileup.pileupscripts;
+package org.seqcode.cegrtools.tagpileup.pileupscripts;
 
 public class TransformArray {
 	

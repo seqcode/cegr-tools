@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.fourcolorplot;
+package org.seqcode.cegrtools.fourcolorplot;
 
 /**
  * FourColorPlot: 

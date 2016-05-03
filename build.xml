@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="galaxyexo">
+<project name="cegrtools">
 
   	<property name="src.dir" location="src" />	
   	<property name="lib.dir" location="lib" />
@@ -142,7 +142,7 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/galaxyexo/bamtoscidx/*.java"/>
+	      <include name="org/seqcode/cegrtools/bamtoscidx/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/BAMtoscIDX.jar" manifest="manifests/bamtoscidx_manifest.txt">	    
 	      <fileset dir="${src.dir}" includes="**/bamtoscidx/*.java"/>
@@ -166,7 +166,7 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/galaxyexo/fourcolorplot/*.java"/>
+	      <include name="org/seqcode/cegrtools/fourcolorplot/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/FourColorPlot.jar" manifest="manifests/fourcolorplot_manifest.txt">	    
 	      <fileset dir="${src.dir}" includes="**/fourcolorplot/*.java"/>
@@ -189,7 +189,7 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/galaxyexo/pairedendcrossplot/*.java"/>
+	      <include name="org/seqcode/cegrtools/pairedendcrossplot/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/PairedendCrossPlot.jar" manifest="manifests/pairedendcrossplot_manifest.txt">	    
 	      <fileset dir="${src.dir}" includes="**/pairedendcrossplot/*.java"/>
@@ -212,7 +212,7 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/galaxyexo/pehistogram/*.java"/>
+	      <include name="org/seqcode/cegrtools/pehistogram/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/PEHistogram.jar" manifest="manifests/pehistogram_manifest.txt">	    
 	      <fileset dir="${src.dir}" includes="**/pehistogram/*.java"/>
@@ -237,7 +237,7 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/galaxyexo/tagpileup/**/*.java"/>
+	      <include name="org/seqcode/cegrtools/tagpileup/**/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/TagPileup.jar" manifest="manifests/tagpileup_manifest.txt">	    
 	      <fileset dir="${src.dir}" includes="**/tagpileup/*.java"/>

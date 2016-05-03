@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.pehistogram;
+package org.seqcode.cegrtools.pehistogram;
 
 import java.awt.Color;
 import java.io.File;

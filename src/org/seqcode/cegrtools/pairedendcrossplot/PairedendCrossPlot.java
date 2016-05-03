@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.pairedendcrossplot;
+package org.seqcode.cegrtools.pairedendcrossplot;
 
 import java.io.File;
 import java.io.FileNotFoundException;

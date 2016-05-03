@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.bamtoscidx;
+package org.seqcode.cegrtools.bamtoscidx;
 
 import htsjdk.samtools.AbstractBAMFileIndex;
 import htsjdk.samtools.SAMRecord;

@@ -1,9 +1,17 @@
-# GalaxyExo
-Collection of java command-line utilities used in the Pugh Lab (Penn State) and as part of 
+#CEGR Tools
+Collection of java command-line utilities used in the Pugh Lab (Center for Eukaryotic Gene Regulation @ Penn State) and as part of 
 the Chip-exo Galaxy flavor. Written by Will Lai. 
 
+##Build Instructions
+(after cloning this repo):
+```
+cd cegrtools;
+ant makealljars;
+```
 
-## BAMtoscIDX
+The `makealljars` build target builds jar files for each of the tools described below, and outputs them into the `build/dist` directory. 
+
+##BAMtoscIDX
 Converts BAM data to ScIdx, the Strand-specific coordinate count format, which is used by 
 tools within the Chip-exo Galaxy flavor. ScIdx files are 1-based. 
 

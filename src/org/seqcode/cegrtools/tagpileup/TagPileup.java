@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.tagpileup;
+package org.seqcode.cegrtools.tagpileup;
 
 import java.awt.Color;
 import java.io.File;
@@ -14,11 +14,11 @@ import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.seqcode.galaxyexo.tagpileup.pileupobjects.BEDCoord;
-import org.seqcode.galaxyexo.tagpileup.pileupobjects.PileupParameters;
-import org.seqcode.galaxyexo.tagpileup.pileupscripts.BAMUtilities;
-import org.seqcode.galaxyexo.tagpileup.pileupscripts.PileupExtract;
-import org.seqcode.galaxyexo.tagpileup.pileupscripts.TransformArray;
+import org.seqcode.cegrtools.tagpileup.pileupobjects.BEDCoord;
+import org.seqcode.cegrtools.tagpileup.pileupobjects.PileupParameters;
+import org.seqcode.cegrtools.tagpileup.pileupscripts.BAMUtilities;
+import org.seqcode.cegrtools.tagpileup.pileupscripts.PileupExtract;
+import org.seqcode.cegrtools.tagpileup.pileupscripts.TransformArray;
 
 import htsjdk.samtools.AbstractBAMFileIndex;
 import htsjdk.samtools.SamReader;

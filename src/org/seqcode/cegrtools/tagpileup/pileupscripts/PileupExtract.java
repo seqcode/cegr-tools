@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.tagpileup.pileupscripts;
+package org.seqcode.cegrtools.tagpileup.pileupscripts;
 
 import htsjdk.samtools.SAMRecord;
 import htsjdk.samtools.SamReader;
@@ -8,8 +8,8 @@ import htsjdk.samtools.util.CloseableIterator;
 import java.io.File;
 import java.util.Vector;
 
-import org.seqcode.galaxyexo.tagpileup.pileupobjects.BEDCoord;
-import org.seqcode.galaxyexo.tagpileup.pileupobjects.PileupParameters;
+import org.seqcode.cegrtools.tagpileup.pileupobjects.BEDCoord;
+import org.seqcode.cegrtools.tagpileup.pileupobjects.PileupParameters;
 
 public class PileupExtract implements Runnable{
 	PileupParameters param;

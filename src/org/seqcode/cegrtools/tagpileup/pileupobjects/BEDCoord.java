@@ -1,4 +1,4 @@
-package org.seqcode.galaxyexo.tagpileup.pileupobjects;
+package org.seqcode.cegrtools.tagpileup.pileupobjects;
 
 import java.util.Comparator;
 

@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: org.seqcode.galaxyexo.fourcolorplot.FourColorPlot
+Main-Class: org.seqcode.cegrtools.fourcolorplot.FourColorPlot

@@ -5,7 +5,7 @@ the Chip-exo Galaxy flavor. Written by Will Lai.
 ##Build Instructions
 (after cloning this repo):
 ```
-cd cegrtools;
+cd cegr-tools;
 ant makealljars;
 ```
 

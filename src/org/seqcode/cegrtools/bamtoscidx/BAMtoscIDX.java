@@ -218,17 +218,17 @@ public class BAMtoscIDX {
 			}
 		}
 		if(BAM == null) {
-			System.out.println("Invalid BAM File!!!\n");
+			System.err.println("Invalid BAM File!!!\n");
 			printUsage();
 			System.exit(0);
 		}
 		if(PAIR < 0 || PAIR > 1) {
-			System.out.println("Invalid Mate-Pair requirement!!!\n");
+			System.err.println("Invalid Mate-Pair requirement!!!\n");
 			printUsage();
 			System.exit(0);		
 		}
 		if(STRAND > 2 || STRAND < 0) {
-			System.out.println("Invalid Strand Output!!!\n");
+			System.err.println("Invalid Strand Output!!!\n");
 			printUsage();
 			System.exit(0);
 		}
@@ -262,21 +262,21 @@ public class BAMtoscIDX {
 	}
 	
 	public static void printUsage() {
-		System.out.println("Usage: java -jar BAMtoscIDX.jar -b [BAMFile] -o [OutputFile] [Options]");
-		System.out.println("-----------------------------------------");
-		System.out.println("Required: BAM file must be sorted and BAI index must be in same folder as BAM file.");
-		System.out.println("\nRequired Parameter:");
-		System.out.println("BAM File:\t\t-b\t\tBAM file");
+		System.err.println("Usage: java -jar BAMtoscIDX.jar -b [BAMFile] -o [OutputFile] [Options]");
+		System.err.println("-----------------------------------------");
+		System.err.println("Required: BAM file must be sorted and BAI index must be in same folder as BAM file.");
+		System.err.println("\nRequired Parameter:");
+		System.err.println("BAM File:\t\t-b\t\tBAM file");
 		
-		System.out.println("\nOptional Parameters:");
-		System.out.println("Output File Name:\t-o\t\tOutput file");
+		System.err.println("\nOptional Parameters:");
+		System.err.println("Output File Name:\t-o\t\tOutput file");
 				
-		System.out.println("\nOptional Paired-end Parameters:");
-		System.out.println("Require proper mate-pairing:\t\t-p\t\t0,1 (1 - yes[Default], 0 - no)");
-		System.out.println("Read to Output:\t\t\t\t-r\t\t0,1,2 (Read1 = 0[Default], Read2 = 1, Combined = 2)");
-		System.out.println("Minimum Insert Size to Output:\t\t-m\t\tInteger or NaN[Default]");
-		System.out.println("Maximum Insert Size to Output:\t\t-M\t\tInteger or NaN[Default]");
-		System.out.println("NOTE: Filtering by insert size parameters will NOT filter out single-end Read 1\nunless proper mate-pairing is required!!!");
+		System.err.println("\nOptional Paired-end Parameters:");
+		System.err.println("Require proper mate-pairing:\t\t-p\t\t0,1 (1 - yes[Default], 0 - no)");
+		System.err.println("Read to Output:\t\t\t\t-r\t\t0,1,2 (Read1 = 0[Default], Read2 = 1, Combined = 2)");
+		System.err.println("Minimum Insert Size to Output:\t\t-m\t\tInteger or NaN[Default]");
+		System.err.println("Maximum Insert Size to Output:\t\t-M\t\tInteger or NaN[Default]");
+		System.err.println("NOTE: Filtering by insert size parameters will NOT filter out single-end Read 1\nunless proper mate-pairing is required!!!");
 
 	}
 	

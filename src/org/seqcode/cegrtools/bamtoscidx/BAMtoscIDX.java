@@ -220,17 +220,17 @@ public class BAMtoscIDX {
 		if(BAM == null) {
 			System.err.println("Invalid BAM File!!!\n");
 			printUsage();
-			System.exit(0);
+			System.exit(1);
 		}
 		if(PAIR < 0 || PAIR > 1) {
 			System.err.println("Invalid Mate-Pair requirement!!!\n");
 			printUsage();
-			System.exit(0);		
+			System.exit(1);		
 		}
 		if(STRAND > 2 || STRAND < 0) {
 			System.err.println("Invalid Strand Output!!!\n");
 			printUsage();
-			System.exit(0);
+			System.exit(1);
 		}
 		if(STRAND == 0) { READ = "READ1"; }
 		else if(STRAND == 1) { READ = "READ2"; }

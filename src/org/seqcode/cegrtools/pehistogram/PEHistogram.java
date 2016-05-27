@@ -136,7 +136,7 @@ public class PEHistogram {
 		if(BAM == null) {
 			System.err.println("No BAM File Loaded!!!\n");
 			printUsage();
-			System.exit(0);
+			System.exit(1);
 		}
 		BAI = new File(BAM.getAbsolutePath() + ".bai");
 		if(!BAI.exists() || BAI.isDirectory()) {

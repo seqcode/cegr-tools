@@ -151,12 +151,12 @@ public class FourColorPlot {
 			}
 		}
 		if(INPUT == null) {
-			System.out.println("No FASTA File loaded!!!\n");
+			System.err.println("No FASTA File loaded!!!\n");
 			printUsage();
 			System.exit(1);
 		}
 		if(PIXEL_HEIGHT < 0 || PIXEL_WIDTH < 0) {
-			System.out.println("Invalid Pixel Size Selected!!!\n");
+			System.err.println("Invalid Pixel Size Selected!!!\n");
 			printUsage();
 			System.exit(1);	
 		}
@@ -164,7 +164,7 @@ public class FourColorPlot {
 		if(A != null) {
 			Color tempColor = verifyRGB(A);
 			if(tempColor == null) {
-				System.out.println("Invalid A RGB Color!!!\n");
+				System.err.println("Invalid A RGB Color!!!\n");
 				printUsage();
 				System.exit(1);
 			} else { AColor = tempColor; }
@@ -172,7 +172,7 @@ public class FourColorPlot {
 		if(T != null) {
 			Color tempColor = verifyRGB(T);
 			if(tempColor == null) {
-				System.out.println("Invalid T RGB Color!!!\n");
+				System.err.println("Invalid T RGB Color!!!\n");
 				printUsage();
 				System.exit(1);
 			} else { TColor = tempColor; }
@@ -180,7 +180,7 @@ public class FourColorPlot {
 		if(G != null) {
 			Color tempColor = verifyRGB(G);
 			if(tempColor == null) {
-				System.out.println("Invalid G RGB Color!!!\n");
+				System.err.println("Invalid G RGB Color!!!\n");
 				printUsage();
 				System.exit(1);
 			} else { GColor = tempColor; }
@@ -188,7 +188,7 @@ public class FourColorPlot {
 		if(C != null) {
 			Color tempColor = verifyRGB(C);
 			if(tempColor == null) {
-				System.out.println("Invalid C RGB Color!!!\n");
+				System.err.println("Invalid C RGB Color!!!\n");
 				printUsage();
 				System.exit(1);
 			} else { CColor = tempColor; }
@@ -196,7 +196,7 @@ public class FourColorPlot {
 		if(N != null) {
 			Color tempColor = verifyRGB(N);
 			if(tempColor == null) {
-				System.out.println("Invalid N RGB Color!!!\n");
+				System.err.println("Invalid N RGB Color!!!\n");
 				printUsage();
 				System.exit(1);
 			} else { NColor = tempColor; }

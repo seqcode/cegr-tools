@@ -203,19 +203,19 @@ public class PairedendCrossPlot {
 			}
 		}
 		if(READ1 == null) {
-			System.out.println("No Read 1 File loaded!!!\n");
+			System.err.println("No Read 1 File loaded!!!\n");
 			printUsage();
-			System.exit(0);
+			System.exit(1);
 		}
 		if(READ2 == null) {
-			System.out.println("No Read 2 File loaded!!!\n");
+			System.err.println("No Read 2 File loaded!!!\n");
 			printUsage();
-			System.exit(0);
+			System.exit(1);
 		}
 		if(WINDOW < 1) {
-			System.out.println("Invalid Window Size Selected!!!\n");
+			System.err.println("Invalid Window Size Selected!!!\n");
 			printUsage();
-			System.exit(0);	
+			System.exit(1);	
 		}
 						
 		if(OUTPUT == null) {
@@ -230,14 +230,14 @@ public class PairedendCrossPlot {
 	}
 		
 	public static void printUsage() {
-		System.out.println("Usage: java -jar PairedendCrossPlot.jar -f [Read1File] -r [Read2File] [Options]");
-		System.out.println("-----------------------------------------");
-		System.out.println("\nRequired Parameter:");
-		System.out.println("Read 1 File:\t\t\t-f\tRead 1 scIDX file");
-		System.out.println("Read 2 File:\t\t\t-r\tRead 1 scIDX file");
-		System.out.println("\nOptional Parameters:");
-		System.out.println("Output File Name:\t\t-o\tOutput file");
-		System.out.println("Window Size +/- Reference:\t-w\t(Default = 500)");
+		System.err.println("Usage: java -jar PairedendCrossPlot.jar -f [Read1File] -r [Read2File] [Options]");
+		System.err.println("-----------------------------------------");
+		System.err.println("\nRequired Parameter:");
+		System.err.println("Read 1 File:\t\t\t-f\tRead 1 scIDX file");
+		System.err.println("Read 2 File:\t\t\t-r\tRead 1 scIDX file");
+		System.err.println("\nOptional Parameters:");
+		System.err.println("Output File Name:\t\t-o\tOutput file");
+		System.err.println("Window Size +/- Reference:\t-w\t(Default = 500)");
 	}
 	
 	private static String getTimeStamp() {

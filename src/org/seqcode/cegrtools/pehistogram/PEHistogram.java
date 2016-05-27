@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import htsjdk.samtools.AbstractBAMFileIndex;
-import htsjdk.samtools.SAMFileReader;
 import htsjdk.samtools.SAMRecord;
 import htsjdk.samtools.SAMSequenceRecord;
+import htsjdk.samtools.SamReader;
+import htsjdk.samtools.SamReaderFactory;
 import htsjdk.samtools.util.CloseableIterator;
 
 /**
@@ -29,14 +30,14 @@ public class PEHistogram {
 	public static int MinSize = 0;
 	public static int MaxSize = 1000;
 			
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		loadConfig(args);
 		System.out.println("Generating Statistics...");
 		generateHist();
 		System.out.println("Program Complete");
 	}
 	
-	public static void generateHist() {
+	public static void generateHist() throws IOException {
 		PrintStream OUT = null;
 		try {
 			OUT = new PrintStream(OUTPUT + ".out");
@@ -47,14 +48,14 @@ public class PEHistogram {
 		if(OUT != null) OUT.println("Chromosome_ID\tChromosome_Size\tAligned_Reads");
 		
 		//Code to get individual chromosome stats
-		SAMFileReader reader = new SAMFileReader(BAM, BAI);
-		AbstractBAMFileIndex bai = (AbstractBAMFileIndex) reader.getIndex();
+		SamReader reader = SamReaderFactory.makeDefault().open(BAM);
+		AbstractBAMFileIndex bai = (AbstractBAMFileIndex) reader.indexing().getIndex();
 		double totalTags = 0;
 		double totalGenome = 0;
 	
 		for (int z = 0; z < bai.getNumberOfReferences(); z++) {
 			SAMSequenceRecord seq = reader.getFileHeader().getSequence(z);
-			double aligned = reader.getIndex().getMetaData(z).getAlignedRecordCount();
+			double aligned = reader.indexing().getIndex().getMetaData(z).getAlignedRecordCount();
 			if(OUT != null) OUT.println(seq.getSequenceName() + "\t" + seq.getSequenceLength() + "\t" + aligned);
 			totalTags += aligned;
 			totalGenome += seq.getSequenceLength();

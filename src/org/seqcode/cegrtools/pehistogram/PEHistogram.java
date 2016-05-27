@@ -120,6 +120,10 @@ public class PEHistogram {
 					BAM = new File(command[i + 1]);
 					i++;
 					break;
+				case 'I':
+					BAI = new File(command[i + 1]);
+					i++;
+					break;
 				case 'l':
 					MinSize = Integer.parseInt(command[i + 1]);
 					i++;
@@ -138,10 +142,8 @@ public class PEHistogram {
 			System.err.println("No BAM File Loaded!!!\n");
 			printUsage();
 			System.exit(1);
-		}
-		BAI = new File(BAM.getAbsolutePath() + ".bai");
-		if(!BAI.exists() || BAI.isDirectory()) {
-			System.err.println("No BAI File Detected!!!\n");
+		} else if(BAI == null) {
+			System.err.println("No BAI Index File loaded!!!\n");
 			printUsage();
 			System.exit(1);
 		}
@@ -161,6 +163,7 @@ public class PEHistogram {
 		System.err.println("-----------------------------------------");
 		System.err.println("Required Parameter:");
 		System.err.println("BAM File: -B [BAM File]");
+		System.err.println("BAI File: -I [BAI File]");
 		System.err.println("Optional Parameters:");
 		System.err.println("Set Lower Limit: -l [Lower Limit]");
 		System.err.println("Set Upper Limit: -u [Upper Limit]");

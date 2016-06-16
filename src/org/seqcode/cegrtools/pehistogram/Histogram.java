@@ -22,7 +22,7 @@ public class Histogram {
 
 	}
 			
-	public static ChartPanel createBarChart(String name, double[] y, int[] x) throws IOException {
+	public static ChartPanel createBarChart(File name, double[] y, int[] x) throws IOException {
 		final XYSeries series = new XYSeries("Frequency");
 		for(int i = 0; i < x.length; i++) {
 			series.add((double)x[i], (double)y[i]);
@@ -35,9 +35,9 @@ public class Histogram {
 		return chartPanel;				
 	}
 	
-	private static JFreeChart createChart(String name, IntervalXYDataset dataset) throws IOException {
+	private static JFreeChart createChart(File name, IntervalXYDataset dataset) throws IOException {
         final JFreeChart chart = ChartFactory.createXYBarChart(
-        		name,      // chart title
+        		name.getName(),      // chart title
                 "Insert Size (bp)",               // domain axis label
                 false,
                 "Frequency",                  // range axis label
@@ -66,7 +66,7 @@ public class Histogram {
         //target.setPaint(new Color(222, 222, 255, 128));
         //plot.addRangeMarker(target, Layer.BACKGROUND);
         
-        ChartUtilities.saveChartAsPNG(new File(name + ".png"), chart, 800, 600);
+        ChartUtilities.saveChartAsPNG(name, chart, 800, 600);
         
         return chart;    
     }

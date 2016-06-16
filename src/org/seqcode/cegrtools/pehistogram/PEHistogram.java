@@ -25,7 +25,8 @@ public class PEHistogram {
 	
 	public static File BAM = null;
 	public static File BAI = null;
-	public static String OUTPUT = null;
+	public static File STAT = null;
+	public static File PNG = null;
 	
 	public static int MinSize = 0;
 	public static int MaxSize = 1000;
@@ -40,7 +41,7 @@ public class PEHistogram {
 	public static void generateHist() throws IOException {
 		PrintStream OUT = null;
 		try {
-			OUT = new PrintStream(OUTPUT + ".out");
+			OUT = new PrintStream(STAT);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -107,7 +108,7 @@ public class PEHistogram {
 		bai.close();
 		
 		try {
-			Histogram.createBarChart(OUTPUT, HIST, DOMAIN);
+			Histogram.createBarChart(PNG, HIST, DOMAIN);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -132,8 +133,12 @@ public class PEHistogram {
 					MaxSize = Integer.parseInt(command[i + 1]);
 					i++;
 					break;
-				case 'o':
-					OUTPUT = command[i + 1];
+				case 't':
+					STAT = new File(command[i + 1]);
+					i++;
+					break;
+				case 'p':
+					PNG = new File(command[i + 1]);
 					i++;
 					break;
 			}
@@ -147,13 +152,17 @@ public class PEHistogram {
 			printUsage();
 			System.exit(1);
 		}
-		if(OUTPUT == null) {
-			OUTPUT = BAM.getName().split("\\.")[0] + "_STATS";
+		if(STAT == null) {
+			STAT = new File(BAM.getName().split("\\.")[0] + "_STATS.txt");
+		}
+		if(PNG == null) {
+			PNG = new File(BAM.getName().split("\\.")[0] + "_HISTOGRAM.png");
 		}
 		System.out.println("-----------------------------------------\nCommand Line Arguments:");
 		System.out.println("BAM file: " + BAM.getName());
 		System.out.println("BAI file: " + BAI.getName());
-		System.out.println("Output filename: " + OUTPUT);
+		System.out.println("Output Statistics filename: " + STAT.getName());
+		System.out.println("Output PNG filename: " + PNG.getName());
 		System.out.println("-----------------------------------------\n");
 
 	}
@@ -167,6 +176,8 @@ public class PEHistogram {
 		System.err.println("Optional Parameters:");
 		System.err.println("Set Lower Limit: -l [Lower Limit]");
 		System.err.println("Set Upper Limit: -u [Upper Limit]");
-		System.err.println("Set Output Filename:  -o [OutputFile]");
+		System.err.println("Set Statistics Output Filename:  -t [OutputFile]");
+		System.err.println("Set PNG Output Filename:  -p [OutputFile]");
+
 	}
 }

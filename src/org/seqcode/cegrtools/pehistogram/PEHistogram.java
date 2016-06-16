@@ -96,7 +96,13 @@ public class PEHistogram {
 		iter.close();
 		if(counter != 0) average /= counter;
 		
-		if(OUT != null) OUT.println("# Average Insert Size: " + average + "\n# Number of ReadPairs: " + counter + "\n# Histogram\n# Size (bp)\tFrequency");
+		//if(OUT != null) OUT.println("# Average Insert Size: " + average + "\n# Number of ReadPairs: " + counter + "\n# Histogram\n# Size (bp)\tFrequency");
+		if(OUT != null) {
+			OUT.println("# Average Insert Size: " + average);
+			OUT.println("# Median Insert Size: " + getMedian(HIST));
+			OUT.println("# Std deviation of Insert Size: " + getStdDev(HIST, average));
+			OUT.println("# Number of ReadPairs: " + counter + "\n# Histogram\n# Size (bp)\tFrequency");
+		}
 		int[] DOMAIN = new int[(MaxSize - MinSize) + 1];
 		for(int z = 0; z < HIST.length; z++) {
 			int bp = MinSize + z;
@@ -111,6 +117,42 @@ public class PEHistogram {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static double getMedian(double[] histogram) {
+		double sum = 0;
+		for(int x = 0; x < histogram.length; x++) { sum += histogram[x]; }
+		if(sum % 2 == 1 && sum > 0) {
+			int num = (int) ((sum + 1) / 2);
+			double count = 0;
+			for(int x = 0; x < histogram.length; x++) {
+				count += histogram[x];
+				if(count >= num) return (x + MinSize);
+			}
+		} else if(sum > 0) {
+			double first = -999;
+			double second = -999;
+			int num = (int) (sum / 2);
+			double count = 0;
+			for(int x = 0; x < histogram.length; x++) {
+				count += histogram[x];
+				if(count >= num & first == -999) first = (x + MinSize);
+				if(count >= num + 1) second = (x + MinSize);
+				if(first != -999 && second != -999) { return (first + second) / 2; }
+			}
+		}		
+		return 0;
+	}
+	
+	public static double getStdDev(double[] histogram, double avg) {
+		double stddev = 0;
+		double sum = 0;
+		for(int x = 0; x < histogram.length; x++) {
+			stddev += (Math.pow(((x + MinSize) - avg), 2) * histogram[x]);
+			sum += histogram[x];
+		}
+		if(sum > 0) return Math.sqrt(stddev / sum);
+		else return 0;
 	}
 	
 	public static void loadConfig(String[] command){

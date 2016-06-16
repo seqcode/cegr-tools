@@ -61,7 +61,7 @@ public class PEHistogram {
 			totalTags += aligned;
 			totalGenome += seq.getSequenceLength();
 		}
-		if(OUT != null) OUT.println("# Total Genome Size: " + totalGenome + "\tTotal Aligned Tags: " + totalTags + "\n#");
+		if(OUT != null) OUT.println("# Total Genome Size: " + totalGenome + "\tTotal Aligned Tags: " + totalTags);
 		
 		//Output replicates used to make bam file
 		for( String comment : reader.getFileHeader().getComments()) {
@@ -76,7 +76,6 @@ public class PEHistogram {
 				OUT.println("# " + reader.getFileHeader().getProgramRecords().get(z).getCommandLine());
 			}
 		}		
-		if(OUT != null) OUT.println("#");
 		
 		double average = 0;
 		double counter = 0;
@@ -97,7 +96,7 @@ public class PEHistogram {
 		iter.close();
 		if(counter != 0) average /= counter;
 		
-		if(OUT != null) OUT.println("# Average Insert Size: " + average + "\n# Number of ReadPairs: " + counter + "\n#\n# Histogram\nSize (bp)\tFrequency");
+		if(OUT != null) OUT.println("# Average Insert Size: " + average + "\n# Number of ReadPairs: " + counter + "\n# Histogram\n# Size (bp)\tFrequency");
 		int[] DOMAIN = new int[(MaxSize - MinSize) + 1];
 		for(int z = 0; z < HIST.length; z++) {
 			int bp = MinSize + z;

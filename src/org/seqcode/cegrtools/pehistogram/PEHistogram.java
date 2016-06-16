@@ -45,8 +45,8 @@ public class PEHistogram {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		if(OUT != null) OUT.println(BAM.getName());
-		if(OUT != null) OUT.println("Chromosome_ID\tChromosome_Size\tAligned_Reads");
+		if(OUT != null) OUT.println("# " + BAM.getName());
+		if(OUT != null) OUT.println("# Chromosome_ID\tChromosome_Size\tAligned_Reads");
 		
 		//Code to get individual chromosome stats
 		SamReader reader = SamReaderFactory.makeDefault().open(BAM);
@@ -57,26 +57,26 @@ public class PEHistogram {
 		for (int z = 0; z < bai.getNumberOfReferences(); z++) {
 			SAMSequenceRecord seq = reader.getFileHeader().getSequence(z);
 			double aligned = reader.indexing().getIndex().getMetaData(z).getAlignedRecordCount();
-			if(OUT != null) OUT.println(seq.getSequenceName() + "\t" + seq.getSequenceLength() + "\t" + aligned);
+			if(OUT != null) OUT.println("# " + seq.getSequenceName() + "\t" + seq.getSequenceLength() + "\t" + aligned);
 			totalTags += aligned;
 			totalGenome += seq.getSequenceLength();
 		}
-		if(OUT != null) OUT.println("Total Genome Size: " + totalGenome + "\tTotal Aligned Tags: " + totalTags + "\n");
+		if(OUT != null) OUT.println("# Total Genome Size: " + totalGenome + "\tTotal Aligned Tags: " + totalTags + "\n#");
 		
 		//Output replicates used to make bam file
 		for( String comment : reader.getFileHeader().getComments()) {
-			if(OUT != null) OUT.println(comment);
+			if(OUT != null) OUT.println("# " + comment);
 		}
 		
 		//Output program used to align bam file
 		for (int z = 0; z < reader.getFileHeader().getProgramRecords().size(); z++) {
 			if(OUT != null) {
-				OUT.print(reader.getFileHeader().getProgramRecords().get(z).getId() + "\t");
-				OUT.println(reader.getFileHeader().getProgramRecords().get(z).getProgramVersion());
-				OUT.println(reader.getFileHeader().getProgramRecords().get(z).getCommandLine());
+				OUT.print("# " + reader.getFileHeader().getProgramRecords().get(z).getId() + "\t");
+				OUT.println("# " + reader.getFileHeader().getProgramRecords().get(z).getProgramVersion());
+				OUT.println("# " + reader.getFileHeader().getProgramRecords().get(z).getCommandLine());
 			}
 		}		
-		if(OUT != null) OUT.println();
+		if(OUT != null) OUT.println("#");
 		
 		double average = 0;
 		double counter = 0;
@@ -97,7 +97,7 @@ public class PEHistogram {
 		iter.close();
 		if(counter != 0) average /= counter;
 		
-		if(OUT != null) OUT.println("Average Insert Size: " + average + "\nNumber of ReadPairs: " + counter + "\n\nHistogram\nSize (bp)\tFrequency");
+		if(OUT != null) OUT.println("# Average Insert Size: " + average + "\n# Number of ReadPairs: " + counter + "\n#\n# Histogram\nSize (bp)\tFrequency");
 		int[] DOMAIN = new int[(MaxSize - MinSize) + 1];
 		for(int z = 0; z < HIST.length; z++) {
 			int bp = MinSize + z;

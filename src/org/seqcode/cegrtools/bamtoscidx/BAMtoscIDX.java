@@ -32,6 +32,7 @@ import java.util.Date;
  */
 public class BAMtoscIDX {
 	private static File BAM = null;
+	private static File BAI = null;
 	private static File OUTPUT = null;
 	
 	private static int STRAND = 0;
@@ -61,17 +62,13 @@ public class BAMtoscIDX {
 		try { OUT = new PrintStream(OUTPUT); }
 		catch (FileNotFoundException e) { e.printStackTrace(); }
 		
-		//Check to Make Sure BAI-index file exists
-		File f = new File(BAM.getAbsolutePath() + ".bai");
-		if(f.exists() && !f.isDirectory()) {
-			//Print Header
-			OUT.println("#" + getTimeStamp() + ";" + BAM.getName() + ";" + READ);
-			OUT.println("chrom\tindex\tforward\treverse\tvalue");
+		//Print Header
+		OUT.println("#" + getTimeStamp() + ";" + BAM.getName() + ";" + READ);
+		OUT.println("chrom\tindex\tforward\treverse\tvalue");
 			
-			processREADS(); //Begin processing reads in BAM file
+		processREADS(); //Begin processing reads in BAM file
 			
-			OUT.close();
-		} else { OUT.println("BAI Index File does not exist for: " + BAM.getName() + "\n"); }
+		OUT.close();
 		System.out.println(getTimeStamp());
 	}
 		
@@ -195,6 +192,10 @@ public class BAMtoscIDX {
 					BAM = new File(command[i + 1]);
 					i++;
 					break;
+				case 'i':
+					BAI = new File(command[i + 1]);
+					i++;
+					break;
 				case 'o':
 					OUTPUT = new File(command[i + 1]);
 					i++;
@@ -243,6 +244,7 @@ public class BAMtoscIDX {
 				
 		System.out.println("-----------------------------------------\nCommand Line Arguments:");
 		System.out.println("BAM file: " + BAM);
+		System.out.println("BAI file: " + BAI);
 		System.out.println("Output: " + OUTPUT);
 		
 		System.out.print("Require proper Mate-pair: ");
@@ -267,7 +269,8 @@ public class BAMtoscIDX {
 		System.err.println("Required: BAM file must be sorted and BAI index must be in same folder as BAM file.");
 		System.err.println("\nRequired Parameter:");
 		System.err.println("BAM File:\t\t-b\t\tBAM file");
-		
+		System.err.println("BAM File:\t\t-i\t\tBAI file");
+
 		System.err.println("\nOptional Parameters:");
 		System.err.println("Output File Name:\t-o\t\tOutput file");
 				

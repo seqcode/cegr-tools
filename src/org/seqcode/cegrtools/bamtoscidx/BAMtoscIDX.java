@@ -223,6 +223,11 @@ public class BAMtoscIDX {
 			printUsage();
 			System.exit(1);
 		}
+		if(BAI == null) {
+			System.err.println("Invalid BAI File!!!\n");
+			printUsage();
+			System.exit(1);
+		}
 		if(PAIR < 0 || PAIR > 1) {
 			System.err.println("Invalid Mate-Pair requirement!!!\n");
 			printUsage();

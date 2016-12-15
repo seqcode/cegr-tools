@@ -240,8 +240,8 @@
 	      <include name="org/seqcode/cegrtools/tagpileup/**/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/TagPileup.jar" manifest="manifests/tagpileup_manifest.txt">	    
-	      <fileset dir="${src.dir}" includes="**/tagpileup/*.java"/>
-	      <fileset dir="${build.classes.dir}" includes="**/tagpileup/*.class"/>
+	      <fileset dir="${src.dir}" includes="**/tagpileup/**/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/tagpileup/**/*.class"/>
 		  <fileset dir="${build.unjar.dir}/picard"/>
 	    </jar>  
 	    <chmod file="${build.dist.dir}/TagPileup.jar" perm="755"/>

@@ -142,7 +142,7 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/cegrtools/bamtoscidx/*.java"/>
+	      <include name="org/seqcode/cegrtools/bamtoscidx/**/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/BAMtoscIDX.jar" manifest="manifests/bamtoscidx_manifest.txt">	    
 	      <fileset dir="${src.dir}" includes="**/bamtoscidx/*.java"/>
@@ -166,11 +166,11 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/cegrtools/fourcolorplot/*.java"/>
+	      <include name="org/seqcode/cegrtools/fourcolorplot/**/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/FourColorPlot.jar" manifest="manifests/fourcolorplot_manifest.txt">	    
-	      <fileset dir="${src.dir}" includes="**/fourcolorplot/*.java"/>
-	      <fileset dir="${build.classes.dir}" includes="**/fourcolorplot/*.class"/>
+	      <fileset dir="${src.dir}" includes="**/fourcolorplot/**/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/fourcolorplot/**/*.class"/>
 	    </jar>  
 	    <chmod file="${build.dist.dir}/FourColorPlot.jar" perm="755"/>
 	</target>
@@ -192,8 +192,8 @@
 	      <include name="org/seqcode/cegrtools/pairedendcrossplot/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/PairedendCrossPlot.jar" manifest="manifests/pairedendcrossplot_manifest.txt">	    
-	      <fileset dir="${src.dir}" includes="**/pairedendcrossplot/*.java"/>
-	      <fileset dir="${build.classes.dir}" includes="**/pairedendcrossplot/*.class"/>
+	      <fileset dir="${src.dir}" includes="**/pairedendcrossplot/**/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/pairedendcrossplot/**/*.class"/>
 	    </jar>  
 	    <chmod file="${build.dist.dir}/PairedendCrossPlot.jar" perm="755"/>
 	</target>
@@ -212,11 +212,11 @@
 		   deprecation="yes"
 		   compiler="modern"
 		   verbose="no">		  
-	      <include name="org/seqcode/cegrtools/pehistogram/*.java"/>
+	      <include name="org/seqcode/cegrtools/pehistogram/**/*.java"/>
 	    </javac>
 		<jar destfile="${build.dist.dir}/PEHistogram.jar" manifest="manifests/pehistogram_manifest.txt">	    
-	      <fileset dir="${src.dir}" includes="**/pehistogram/*.java"/>
-	      <fileset dir="${build.classes.dir}" includes="**/pehistogram/*.class"/>
+	      <fileset dir="${src.dir}" includes="**/pehistogram/**/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/pehistogram/**/*.class"/>
 		  <fileset dir="${build.unjar.dir}/picard"/>
 		  <fileset dir="${build.unjar.dir}/jfreechart"/>
 	    </jar>  

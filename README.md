@@ -34,3 +34,5 @@ Creates a composite histogram of mapped sequencing tag 5' ends around a set of g
 ##PairedendCrossPlot
 Creates a cross-plot from paired end sequencing data. 
 
+##filterforPIPseq
+Filters sorted and indexed BAM file by the -1 5' nucleotide given BAM file and genomic FASTA file

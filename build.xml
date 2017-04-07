@@ -118,14 +118,37 @@
 	    <move file="${build.unjar.dir}.tmp" tofile="${build.unjar.dir}/jfreechart" />
  	</target>
 	
-	
 	<!-- ======================================================================= -->
 	<!-- Target: makealljars                                                     -->
 	<!-- Description: Makes all executable jar files                             -->
 	<!-- ======================================================================= -->
 	<target name="makealljars" depends="makebamtoscidxjar, makefourcolorplotjar, makepairedendcrossplotjar, 
-					makepehistogramjar, maketagpileupjar"
+					makepehistogramjar, maketagpileupjar, makefilterforpipseqjar"
 					description="make all executable jars" >
+	</target>
+
+	<!-- ======================================================================= -->
+	<!-- Targets: makefilterforpipseqjar                                         -->
+	<!-- Description: make an executable jar for filterforPIPseq			     -->
+	<!-- ======================================================================= -->
+	<target name="makefilterforpipseqjar" depends="init, build, unjarpicard" 
+		description="make an executable jar for filterforPIPseq" >
+	    <javac srcdir="${src.dir}"
+		   destdir="${build.classes.dir}"	
+		   classpathref="compile.classpath"
+		   debug="true"
+		   debuglevel="lines,vars,source"
+		   deprecation="yes"
+		   compiler="modern"
+		   verbose="no">		  
+	      <include name="org/seqcode/cegrtools/filterforPIPseq/*.java"/>
+	    </javac>
+		<jar destfile="${build.dist.dir}/filterforPIPseq.jar" manifest="manifests/filterforPIPseq_manifest.txt">	    
+	      <fileset dir="${src.dir}" includes="**/filterforPIPseq/*.java"/>
+	      <fileset dir="${build.classes.dir}" includes="**/filterforPIPseq/*.class"/>
+		  <fileset dir="${build.unjar.dir}/picard"/>
+	    </jar>  
+	    <chmod file="${build.dist.dir}/filterforPIPseq.jar" perm="755"/>
 	</target>
 
 	<!-- ======================================================================= -->

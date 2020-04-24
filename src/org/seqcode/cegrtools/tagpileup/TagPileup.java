@@ -138,7 +138,7 @@ public class TagPileup {
 		}
 		
 		//Code to standardize tags sequenced to genome size (1 tag / 1 bp)
-		if(PARAM.getStandard()) { PARAM.setRatio(BAMUtilities.calculateStandardizationRatio(BAM)); }
+		if(PARAM.getStandard()) { PARAM.setRatio(BAMUtilities.calculateStandardizationRatio(BAM, PARAM.getRead())); }
 							
 			if(PARAM.getOutputType() != 0) {
 				if(STRAND == 0) {
